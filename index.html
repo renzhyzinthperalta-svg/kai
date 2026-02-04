@@ -1,0 +1,98 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport"
+        content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no, viewport-fit=cover" />
+  <title>Zarene 💖</title>
+
+  <style>
+    * { box-sizing: border-box; -webkit-tap-highlight-color: transparent; }
+
+    html, body {
+      width: 100%;
+      height: 100%;
+      margin: 0; padding: 0;
+      overflow: hidden;
+      font-family: -apple-system, BlinkMacSystemFont, system-ui, sans-serif;
+      background: linear-gradient(135deg, #ff9a9e, #fad0c4);
+    }
+
+    body {
+      display: flex; align-items: center; justify-content: center;
+      padding: env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+    }
+
+    .card {
+      width: min(92vw, 420px);
+      background: #fff; border-radius: 24px;
+      padding: 24px 20px 28px;
+      text-align: center;
+      box-shadow: 0 18px 40px rgba(0,0,0,0.25);
+      animation: pop 0.7s ease-out;
+      position: relative; z-index: 2;
+    }
+
+    @keyframes pop { from { transform: scale(0.9); opacity: 0; } to { transform: scale(1); opacity: 1; } }
+
+    h1 { margin:0; font-size:1.65rem; color:#ff4d6d; line-height:1.3; }
+    .name { margin-top:6px; font-size:1.4rem; font-weight:700; color:#ff4d6d; }
+
+    .buttons { margin-top:22px; display:flex; flex-direction:column; gap:14px; }
+    button {
+      width: 100%; padding:15px; font-size:1.1rem; border:none;
+      border-radius:16px; cursor:pointer; touch-action:manipulation;
+    }
+    button:active { transform: scale(0.96); }
+    #yes { background:#ff4d6d; color:#fff; box-shadow:0 10px 20px rgba(255,77,109,0.45); }
+    #no { background:#e9ecef; color:#333; position:relative; }
+
+    #message { margin-top:20px; font-size:1.05rem; font-weight:600; color:#ff4d6d; min-height:1.5em; }
+
+    .heart {
+      position: fixed; bottom:-30px; font-size:22px;
+      pointer-events:none; animation:floatUp linear forwards; will-change: transform, opacity;
+    }
+    @keyframes floatUp { from{transform:translateY(0) scale(1); opacity:0;} 15%{opacity:1;} to{transform:translateY(-120vh) scale(1.4); opacity:0;} }
+  </style>
+</head>
+<body>
+
+  <div class="card">
+    <h1>Will you be my Valentine,</h1>
+    <div class="name">Dianne? 💖</div>
+
+    <div class="buttons">
+      <button id="yes" onclick="yesAnswer()">Yes 💖</button>
+      <button id="no" onclick="moveNo()">No 💔</button>
+    </div>
+
+    <div id="message"></div>
+  </div>
+
+  <script>
+    function yesAnswer() {
+      document.getElementById("message").textContent =
+        "YAY!!! 🥳💞 Dianne, you made my heart the happiest 😍🌹💖";
+    }
+
+    function moveNo() {
+      const noBtn = document.getElementById("no");
+      const x = (Math.random()*60)-30;
+      const y = (Math.random()*40)-20;
+      noBtn.style.transform = `translate(${x}px, ${y}px)`;
+    }
+
+    setInterval(() => {
+      const heart = document.createElement("div");
+      heart.className = "heart";
+      heart.textContent = "💖";
+      heart.style.left = Math.random()*100 + "vw";
+      heart.style.animationDuration = (Math.random()*3 + 4) + "s";
+      document.body.appendChild(heart);
+      setTimeout(() => heart.remove(), 7000);
+    }, 700);
+  </script>
+
+</body>
+</html>
